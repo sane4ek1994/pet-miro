@@ -1,5 +1,11 @@
-import {BoardPage} from "@/features/board";
+import { BoardPage } from "@/features/board";
+import { BoardCard } from "@/features/board-list";
 
 export function App() {
-    return <div><BoardPage/></div>;
+  return (
+    <div>
+      <BoardPage />
+      <BoardCard />
+    </div>
+  );
 }

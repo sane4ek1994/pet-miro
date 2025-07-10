@@ -1,3 +1,3 @@
 export function BoardPage() {
-    return <div>BoardPage</div>;
+  return <div>BoardPage</div>;
 }
