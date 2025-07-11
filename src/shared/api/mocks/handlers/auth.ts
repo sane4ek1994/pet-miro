@@ -1,6 +1,6 @@
-import { ApiSchemas } from '../../schema'
 import { http } from '../http'
 import { HttpResponse } from 'msw'
+import type { ApiSchemas } from '@/shared/api/schema'
 
 const userPasswords = new Map<string, string>()
 const mockUsers: ApiSchemas['User'][] = [
