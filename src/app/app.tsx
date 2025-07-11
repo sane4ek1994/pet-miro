@@ -1,11 +1,15 @@
-import { BoardPage } from "@/features/board";
-import { BoardCard } from "@/features/board-list";
+import { Outlet, useLocation } from 'react-router'
+import { ROUTES } from '@/shared/model/routes.ts'
+import { AppHeader } from '@/features/header'
 
 export function App() {
+  const location = useLocation()
+
+  const isAuthPage = location.pathname === ROUTES.LOGIN || location.pathname === ROUTES.REGISTER
   return (
     <div>
-      <BoardPage />
-      <BoardCard />
+      {!isAuthPage && <AppHeader />}
+      <Outlet />
     </div>
-  );
+  )
 }
