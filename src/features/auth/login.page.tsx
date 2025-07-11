@@ -1,5 +1,11 @@
+import { rqClient } from '@/shared/api/instance.ts'
+
 function LoginPage() {
-  return <div>LoginPage</div>;
+  const loginMutation = rqClient.useMutation('post', '/auth/login')
+
+  loginMutation.mutate({ body: {} })
+
+  return <div>LoginPage</div>
 }
 
-export const Component = LoginPage;
+export const Component = LoginPage
