@@ -1,31 +1,36 @@
-import { ROUTES } from "../shared/model/routes";
-import { createBrowserRouter, redirect } from "react-router";
-import { App } from "@/app/app.tsx";
+import { ROUTES } from '../shared/model/routes'
+import { createBrowserRouter, redirect } from 'react-router'
+import { App } from '@/app/app.tsx'
+import { Providers } from '@/app/providers'
 
 export const router = createBrowserRouter([
   {
-    element: <App />,
+    element: (
+      <Providers>
+        <App />
+      </Providers>
+    ),
     children: [
       {
         path: ROUTES.BOARDS,
-        lazy: () => import("@/features/boards-list/boards-list.page"),
+        lazy: () => import('@/features/boards-list/boards-list.page')
       },
       {
         path: ROUTES.BOARD,
-        lazy: () => import("@/features/board/board.page"),
+        lazy: () => import('@/features/board/board.page')
       },
       {
         path: ROUTES.LOGIN,
-        lazy: () => import("@/features/auth/login.page.tsx"),
+        lazy: () => import('@/features/auth/login.page.tsx')
       },
       {
         path: ROUTES.REGISTER,
-        lazy: () => import("@/features/auth/register.page"),
+        lazy: () => import('@/features/auth/register.page')
       },
       {
         path: ROUTES.HOME,
-        loader: () => redirect(ROUTES.BOARDS),
-      },
-    ],
-  },
-]);
+        loader: () => redirect(ROUTES.BOARDS)
+      }
+    ]
+  }
+])
