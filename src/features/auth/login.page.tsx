@@ -1,11 +1,12 @@
 import { AuthLayout } from '@/features/auth/auth-layout.tsx'
 import { href, Link } from 'react-router'
 import { ROUTES } from '@/shared/model/routes.ts'
+import { LoginForm } from '@/features/auth/login-form.tsx'
 
 function LoginPage() {
   return (
     <AuthLayout
-      form={<form></form>}
+      form={<LoginForm />}
       title='Вход в систему'
       description='Введите ваш email и пароль'
       footerText={
