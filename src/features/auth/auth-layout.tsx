@@ -9,7 +9,7 @@ export function AuthLayout({
   form: React.ReactNode
   title: string
   description: string
-  footerText?: string
+  footerText?: React.ReactNode
 }) {
   return (
     <main className='grow flex flex-col items-center pt-[200px]'>
@@ -20,7 +20,6 @@ export function AuthLayout({
         </CardHeader>
         <CardContent>{form}</CardContent>
         <CardFooter>
-          Нет аккаунта?
           <p className='text-sm text-muted-foreground ml-2.5 [&_a]:underline [&_a]:text-primary'>{footerText}</p>
         </CardFooter>
       </Card>
