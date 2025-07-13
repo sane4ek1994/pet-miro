@@ -27,8 +27,8 @@ export const boardsHandlers = [
     return HttpResponse.json(board)
   }),
   http.delete('/boards/{boardId}', (params) => {
-    const { boardId } = params
-    const index = boards.findIndex((board) => board.id === boardId)
+    const { requestId } = params
+    const index = boards.findIndex((board) => board.id === requestId)
     if (index === -1) {
       return HttpResponse.json({ message: 'Board not found', code: 'NOT_FOUND' }, { status: 404 })
     }

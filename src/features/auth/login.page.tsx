@@ -1,7 +1,6 @@
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/shared/ui/kit/card.tsx'
 import { href, Link } from 'react-router'
 import { ROUTES } from '@/shared/model/routes.ts'
-import { Button } from '@/shared/ui/kit/button.tsx'
 
 function LoginPage() {
   return (
@@ -15,11 +14,11 @@ function LoginPage() {
           <form></form>
         </CardContent>
         <CardFooter>
-          <p>
-            Нет аккаунта?
-            <Button asChild variant='link'>
-              <Link to={href(ROUTES.REGISTER)}>Зарегистрируйтесь</Link>
-            </Button>
+          Нет аккаунта?
+          <p className='text-sm text-muted-foreground ml-2.5'>
+            <Link className='underline text-primary' to={href(ROUTES.REGISTER)}>
+              Зарегистрируйтесь
+            </Link>
           </p>
         </CardFooter>
       </Card>
