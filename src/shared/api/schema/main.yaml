@@ -3,6 +3,14 @@ info:
   title: Miro-like Collaborative Whiteboard API
   description: API for a collaborative whiteboard application similar to Miro
   version: 1.0.0
+
+components:
+ securitySchemes:
+   bearerAuth:
+    type: http
+    scheme: bearer
+    bearerFormat: JWT
+
 paths:
   /auth/login:
     post:
