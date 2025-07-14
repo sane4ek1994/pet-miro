@@ -1,7 +1,7 @@
-import { AuthLayout } from '@/features/auth/auth-layout.tsx'
+import { AuthLayout } from '@/features/auth/ui/auth-layout.tsx'
 import { href, Link } from 'react-router'
 import { ROUTES } from '@/shared/model/routes.ts'
-import { LoginForm } from '@/features/auth/login-form.tsx'
+import { LoginForm } from '@/features/auth/ui/login-form.tsx'
 
 function LoginPage() {
   return (

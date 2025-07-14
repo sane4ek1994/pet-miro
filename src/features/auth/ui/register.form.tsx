@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form'
 import { Button } from '@/shared/ui/kit/button.tsx'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useRegister } from '@/features/auth/use-register.ts'
+import { useRegister } from '@/features/auth/modal/use-register.ts'
 
 const registerSchema = z
   .object({
