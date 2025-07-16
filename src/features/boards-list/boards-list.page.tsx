@@ -1,11 +1,11 @@
 import { href, Link } from 'react-router'
-import { ROUTES } from '@/shared/model/routes.ts'
-import { CONFIG } from '@/shared/model/config.ts'
-import { rqClient } from '@/shared/api/instance.ts'
+import { ROUTES } from '@/shared/model/routes'
+import { CONFIG } from '@/shared/model/config'
+import { rqClient } from '@/shared/api/instance'
 import { useQueryClient } from '@tanstack/react-query'
-import { Button } from '@/shared/ui/kit/button.tsx'
-import { Card, CardFooter, CardHeader } from '@/shared/ui/kit/card.tsx'
-import { Input } from '@/shared/ui/kit/input.tsx'
+import { Button } from '@/shared/ui/kit/button'
+import { Card, CardFooter, CardHeader } from '@/shared/ui/kit/card'
+import { Input } from '@/shared/ui/kit/input'
 
 export { BoardCard } from './board-card'
 

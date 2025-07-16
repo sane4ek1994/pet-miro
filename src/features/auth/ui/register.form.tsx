@@ -1,10 +1,10 @@
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/shared/ui/kit/form.tsx'
-import { Input } from '@/shared/ui/kit/input.tsx'
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/shared/ui/kit/form'
+import { Input } from '@/shared/ui/kit/input'
 import { useForm } from 'react-hook-form'
-import { Button } from '@/shared/ui/kit/button.tsx'
+import { Button } from '@/shared/ui/kit/button'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useRegister } from '@/features/auth/modal/use-register.ts'
+import { useRegister } from '@/features/auth/modal/use-register'
 
 const registerSchema = z
   .object({
