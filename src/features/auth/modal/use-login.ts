@@ -1,12 +1,13 @@
-import { useNavigate } from 'react-router'
-import type { ApiSchemas } from '@/shared/api/schema'
-import { useSession } from '@/shared/model/session'
-import { ROUTES } from '@/shared/model/routes'
 import { publicRqClient } from '@/shared/api/instance'
+import { ApiSchemas } from '@/shared/api/schema'
+import { ROUTES } from '@/shared/model/routes'
+import { useSession } from '@/shared/model/session'
+import { useNavigate } from 'react-router'
 
 export function useLogin() {
-  const session = useSession()
   const navigate = useNavigate()
+
+  const session = useSession()
   const loginMutation = publicRqClient.useMutation('post', '/auth/login', {
     onSuccess(data) {
       session.login(data.accessToken)
@@ -18,7 +19,11 @@ export function useLogin() {
     loginMutation.mutate({ body: data })
   }
 
-  const errorMessage = loginMutation.isError ? loginMutation.error?.message : undefined
+  const errorMessage = loginMutation.isError ? loginMutation.error.message : undefined
 
-  return { login, isPending: loginMutation.isPending, errorMessage }
+  return {
+    login,
+    isPending: loginMutation.isPending,
+    errorMessage
+  }
 }

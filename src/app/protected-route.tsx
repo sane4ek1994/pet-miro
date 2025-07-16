@@ -1,4 +1,4 @@
-import { Navigate, Outlet } from 'react-router'
+import { Navigate, Outlet, redirect } from 'react-router'
 import { ROUTES } from '@/shared/model/routes'
 import { useSession } from '@/shared/model/session'
 
@@ -10,4 +10,14 @@ export function ProtectedRoute() {
   }
 
   return <Outlet />
+}
+
+export async function protectedLoader() {
+  const token = await useSession.getState().refreshToken()
+
+  if (!token) {
+    redirect(ROUTES.LOGIN)
+  }
+
+  return null
 }

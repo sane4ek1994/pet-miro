@@ -1,7 +1,7 @@
 import { http } from '../http'
 import { delay, HttpResponse } from 'msw'
 import type { ApiSchemas } from '@/shared/api/schema'
-import { createRefreshTokenCookie, generateTokens, verifyToken } from '@/shared/api/mocks/session.ts'
+import { createRefreshTokenCookie, generateTokens, verifyToken } from '@/shared/api/mocks/session'
 
 const mockUsers: ApiSchemas['User'][] = [
   {

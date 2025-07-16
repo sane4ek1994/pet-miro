@@ -1,7 +1,7 @@
 import { href, Link } from 'react-router'
 import { ROUTES } from '@/shared/model/routes'
 import { CONFIG } from '@/shared/model/config'
-import { rqClient } from '@/shared/api/instance'
+import { publicRqClient } from '@/shared/api/instance'
 import { useQueryClient } from '@tanstack/react-query'
 import { Button } from '@/shared/ui/kit/button'
 import { Card, CardFooter, CardHeader } from '@/shared/ui/kit/card'
@@ -12,17 +12,17 @@ export { BoardCard } from './board-card'
 function BoardListPage() {
   const queryClient = useQueryClient()
 
-  const boardsQuery = rqClient.useQuery('get', '/boards')
+  const boardsQuery = publicRqClient.useQuery('get', '/boards')
 
-  const createBoardMutation = rqClient.useMutation('post', '/boards', {
+  const createBoardMutation = publicRqClient.useMutation('post', '/boards', {
     onSettled: async () => {
-      await queryClient.invalidateQueries(rqClient.queryOptions('get', '/boards'))
+      await queryClient.invalidateQueries(publicRqClient.queryOptions('get', '/boards'))
     }
   })
 
-  const deletedBoardMutation = rqClient.useMutation('delete', '/boards/{boardId}', {
+  const deletedBoardMutation = publicRqClient.useMutation('delete', '/boards/{boardId}', {
     onSettled: async () => {
-      await queryClient.invalidateQueries(rqClient.queryOptions('get', '/boards'))
+      await queryClient.invalidateQueries(publicRqClient.queryOptions('get', '/boards'))
     }
   })
 
