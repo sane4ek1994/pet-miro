@@ -1,7 +1,7 @@
 import { HttpResponse } from 'msw'
 import { http } from '../http'
 import type { ApiSchemas } from '@/shared/api/schema'
-import { verifyTokenOrThrow } from '@/shared/api/mocks/session.ts'
+import { verifyTokenOrThrow } from '@/shared/api/mocks/session'
 
 const boards: ApiSchemas['Board'][] = [
   {

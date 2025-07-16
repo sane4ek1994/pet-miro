@@ -1,10 +1,10 @@
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/shared/ui/kit/form.tsx'
-import { Input } from '@/shared/ui/kit/input.tsx'
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/shared/ui/kit/form'
+import { Input } from '@/shared/ui/kit/input'
 import { useForm } from 'react-hook-form'
-import { Button } from '@/shared/ui/kit/button.tsx'
+import { Button } from '@/shared/ui/kit/button'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useLogin } from '@/features/auth/modal/use-login.ts'
+import { useLogin } from '@/features/auth/modal/use-login'
 
 const loginSchema = z.object({
   email: z.email({ error: 'Email некорректен' }),

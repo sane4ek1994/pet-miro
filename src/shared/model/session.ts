@@ -2,8 +2,6 @@ import { useState } from 'react'
 import { jwtDecode } from 'jwt-decode'
 import { createGStore } from 'create-gstore'
 import { publicFetchClient } from '@/shared/api/instance'
-import { useNavigate } from 'react-router'
-import { ROUTES } from '@/shared/model/routes'
 
 const TOKEN_KEY = 'token'
 let refreshTokenPromise: Promise<string | null> | null = null
@@ -17,7 +15,6 @@ type Session = {
 
 export const useSession = createGStore(() => {
   const [token, setToken] = useState<string | null>(() => localStorage.getItem(TOKEN_KEY))
-  const navigate = useNavigate()
 
   const login = (token: string) => {
     localStorage.setItem(TOKEN_KEY, token)
@@ -27,7 +24,6 @@ export const useSession = createGStore(() => {
   const logout = () => {
     localStorage.removeItem(TOKEN_KEY)
     setToken(null)
-    navigate(ROUTES.LOGIN)
   }
 
   const session = token ? jwtDecode<Session>(token) : null

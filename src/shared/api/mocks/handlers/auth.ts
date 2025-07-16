@@ -7,10 +7,15 @@ const mockUsers: ApiSchemas['User'][] = [
   {
     id: '1',
     email: 'admin@gmail.com'
+  },
+  {
+    id: '2',
+    email: 'mfq07k9cz@gmail.com'
   }
 ]
 const userPasswords = new Map<string, string>()
 userPasswords.set('admin@gmail.com', '123456')
+userPasswords.set('mfq07k9cz@gmail.com', '111111')
 
 export const authHandlers = [
   http.post('/auth/login', async ({ request }) => {
