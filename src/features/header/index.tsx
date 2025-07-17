@@ -4,8 +4,6 @@ import { Button } from '@/shared/ui/kit/button'
 export function AppHeader() {
   const { session, logout } = useSession()
 
-  console.log(session)
-
   if (!session) return null
 
   return (

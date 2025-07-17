@@ -33,8 +33,6 @@ export const useSession = createGStore(() => {
 
     const session = jwtDecode<Session>(token)
 
-    console.log(session)
-
     if (session.exp < Date.now() / 1000) {
       if (!refreshTokenPromise) {
         refreshTokenPromise = publicFetchClient
