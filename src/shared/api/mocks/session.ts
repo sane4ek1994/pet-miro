@@ -1,5 +1,5 @@
-import { HttpResponse } from 'msw'
 import { jwtVerify, SignJWT } from 'jose'
+import { HttpResponse } from 'msw'
 
 type Session = {
   userId: string
@@ -7,7 +7,7 @@ type Session = {
 }
 
 const JWT_SECRET = new TextEncoder().encode('your-secret-key')
-const ACCESS_TOKEN_EXPIRY = '1d'
+const ACCESS_TOKEN_EXPIRY = '3s'
 const REFRESH_TOKEN_EXPIRY = '7d'
 
 export function createRefreshTokenCookie(refreshToken: string) {
