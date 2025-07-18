@@ -1,16 +1,15 @@
 import { rqClient } from '@/shared/api/instance'
+import { keepPreviousData } from '@tanstack/query-core'
 import { RefCallback, useCallback } from 'react'
-
-type BoardsSortOption = 'createdAt' | 'updatedAt' | 'lastOpenedAt' | 'name'
 
 type UseBoardsListParams = {
   limit?: number
-  search?: string
   isFavorite?: boolean
-  sort?: BoardsSortOption
+  search?: string
+  sort?: 'createdAt' | 'updatedAt' | 'lastOpenedAt' | 'name'
 }
 
-export function useBoardsList({ limit = 20, search, isFavorite, sort }: UseBoardsListParams) {
+export function useBoardsList({ limit = 20, isFavorite, search, sort }: UseBoardsListParams) {
   const { fetchNextPage, data, isFetchingNextPage, isPending, hasNextPage } = rqClient.useInfiniteQuery(
     'get',
     '/boards',
@@ -19,8 +18,8 @@ export function useBoardsList({ limit = 20, search, isFavorite, sort }: UseBoard
         query: {
           page: 1,
           limit,
-          search,
           isFavorite,
+          search,
           sort
         }
       }
@@ -29,7 +28,9 @@ export function useBoardsList({ limit = 20, search, isFavorite, sort }: UseBoard
       initialPageParam: 1,
       pageParamName: 'page',
       getNextPageParam: (lastPage, _, lastPageParams) =>
-        Number(lastPageParams) > lastPage.totalPages ? lastPageParams + 1 : null
+        Number(lastPageParams) < lastPage.totalPages ? Number(lastPageParams) + 1 : null,
+
+      placeholderData: keepPreviousData
     }
   )
 
@@ -57,5 +58,11 @@ export function useBoardsList({ limit = 20, search, isFavorite, sort }: UseBoard
 
   const boards = data?.pages.flatMap((page) => page.list) ?? []
 
-  return { cursorRef, boards, isFetchingNextPage, isPending, hasNextPage }
+  return {
+    boards,
+    isFetchingNextPage,
+    isPending,
+    hasNextPage,
+    cursorRef
+  }
 }

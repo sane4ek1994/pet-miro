@@ -1,4 +1,3 @@
-import { useRef, useState } from 'react'
 import { rqClient } from '@/shared/api/instance'
 import { CONFIG } from '@/shared/model/config'
 import { ROUTES } from '@/shared/model/routes'
@@ -13,23 +12,20 @@ import { Switch } from '@/shared/ui/kit/switch'
 import { Tabs, TabsList, TabsTrigger } from '@/shared/ui/kit/tabs'
 import { ApiSchemas } from '@/shared/api/schema'
 import { useBoardsList } from '@/features/boards-list/use-boards-list'
+import { useBoardsFilters } from '@/features/boards-list/use-boards-filters'
+import { useDebouncedValue } from '@/shared/lib/react'
 
 type BoardsSortOption = 'createdAt' | 'updatedAt' | 'lastOpenedAt' | 'name'
 
 function BoardsListPage() {
   const queryClient = useQueryClient()
-  const [page, setPage] = useState(1)
-  const [search, setSearch] = useState('')
-  const [debouncedSearch, setDebouncedSearch] = useState('')
-  const [sort, setSort] = useState<BoardsSortOption>('lastOpenedAt')
-  const [showFavorites, setShowFavorites] = useState<boolean | null>(null)
-  const [boards, setBoards] = useState<ApiSchemas['Board'][]>([])
-  const [hasMore, setHasMore] = useState(true)
-  const [isLoadingMore, setIsLoadingMore] = useState(false)
-  const observer = useRef<IntersectionObserver | null>(null)
-  const loadMoreRef = useRef<HTMLDivElement>(null)
 
-  const boardsQuery = useBoardsList({})
+  const boardsFilters = useBoardsFilters()
+
+  const boardsQuery = useBoardsList({
+    sort: boardsFilters.sort,
+    search: useDebouncedValue(boardsFilters.search, 300)
+  })
 
   //
   // const boardsQuery = rqClient.useQuery('get', '/boards', {
@@ -69,7 +65,6 @@ function BoardsListPage() {
   const createBoardMutation = rqClient.useMutation('post', '/boards', {
     onSettled: async () => {
       await queryClient.invalidateQueries(rqClient.queryOptions('get', '/boards'))
-      setPage(1)
     }
   })
 
@@ -102,15 +97,18 @@ function BoardsListPage() {
           <Input
             id='search'
             placeholder='Введите название доски...'
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
+            value={boardsFilters.search}
+            onChange={(e) => boardsFilters.setSearch(e.target.value)}
             className='w-full'
           />
         </div>
 
         <div className='flex flex-col'>
           <Label htmlFor='sort'>Сортировка</Label>
-          <Select value={sort} onValueChange={(value) => setSort(value as BoardsSortOption)}>
+          <Select
+            value={boardsFilters.sort}
+            onValueChange={(value) => boardsFilters.setSort(value as BoardsSortOption)}
+          >
             <SelectTrigger id='sort' className='w-full'>
               <SelectValue placeholder='Сортировка' />
             </SelectTrigger>
@@ -126,12 +124,8 @@ function BoardsListPage() {
 
       <Tabs defaultValue='all' className='mb-6'>
         <TabsList>
-          <TabsTrigger value='all' onClick={() => setShowFavorites(null)}>
-            Все доски
-          </TabsTrigger>
-          <TabsTrigger value='favorites' onClick={() => setShowFavorites(true)}>
-            Избранные
-          </TabsTrigger>
+          <TabsTrigger value='all'>Все доски</TabsTrigger>
+          <TabsTrigger value='favorites'>Избранные</TabsTrigger>
         </TabsList>
       </Tabs>
 
