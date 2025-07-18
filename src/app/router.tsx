@@ -1,9 +1,9 @@
-import { ROUTES } from '@/shared/model/routes'
 import { createBrowserRouter, redirect } from 'react-router'
-import { Providers } from '@/app/providers'
-import { App } from '@/app/app'
-import { protectedLoader, ProtectedRoute } from '@/app/protected-route'
+import { App } from './app'
+import { Providers } from './providers'
+import { protectedLoader, ProtectedRoute } from './protected-route'
 import { AppHeader } from '@/features/header'
+import { ROUTES } from '@/shared/model/routes'
 
 export const router = createBrowserRouter([
   {
@@ -24,7 +24,15 @@ export const router = createBrowserRouter([
         children: [
           {
             path: ROUTES.BOARDS,
-            lazy: () => import('@/features/boards-list/boards-list.page')
+            lazy: () => import('../../../pet-miro/src/features/boards-list/boards-list.page')
+          },
+          {
+            path: ROUTES.FAVORITE_BOARDS,
+            lazy: () => import('../../../pet-miro/src/features/boards-list/boards-list-favorite.page')
+          },
+          {
+            path: ROUTES.RECENT_BOARDS,
+            lazy: () => import('../../../pet-miro/src/features/boards-list/boards-list-recent.page')
           },
           {
             path: ROUTES.BOARD,
@@ -32,10 +40,7 @@ export const router = createBrowserRouter([
           }
         ]
       },
-      {
-        path: ROUTES.HOME,
-        loader: () => redirect(ROUTES.BOARDS)
-      },
+
       {
         path: ROUTES.LOGIN,
         lazy: () => import('@/features/auth/login.page')
@@ -43,6 +48,10 @@ export const router = createBrowserRouter([
       {
         path: ROUTES.REGISTER,
         lazy: () => import('@/features/auth/register.page')
+      },
+      {
+        path: ROUTES.HOME,
+        loader: () => redirect(ROUTES.BOARDS)
       }
     ]
   }

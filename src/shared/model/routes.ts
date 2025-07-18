@@ -5,7 +5,9 @@ export const ROUTES = {
   LOGIN: '/login',
   REGISTER: '/register',
   BOARDS: '/boards',
-  BOARD: '/boards/:boardId'
+  BOARD: '/boards/:boardId',
+  FAVORITE_BOARDS: '/boards/favorite',
+  RECENT_BOARDS: '/boards/recent'
 } as const
 
 export type PathParams = {

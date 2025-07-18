@@ -1,6 +1,6 @@
-import { rqClient } from '@/shared/api/instance'
 import { useQueryClient } from '@tanstack/react-query'
 import { startTransition, useOptimistic } from 'react'
+import { rqClient } from '@/shared/api/instance'
 
 export function useUpdateFavorite() {
   const queryClient = useQueryClient()

@@ -1,6 +1,6 @@
-import { rqClient } from '@/shared/api/instance'
 import { keepPreviousData } from '@tanstack/query-core'
 import { RefCallback, useCallback } from 'react'
+import { rqClient } from '@/shared/api/instance'
 
 type UseBoardsListParams = {
   limit?: number
@@ -10,6 +10,8 @@ type UseBoardsListParams = {
 }
 
 export function useBoardsList({ limit = 20, isFavorite, search, sort }: UseBoardsListParams) {
+  // @ts-ignore
+  // @ts-ignore
   const { fetchNextPage, data, isFetchingNextPage, isPending, hasNextPage } = rqClient.useInfiniteQuery(
     'get',
     '/boards',
